@@ -1,0 +1,32 @@
+***Domain***
+TODO:  Crear entidad Report (Reporte). esta entidad tendralos siguientes campos
+
+-login_usuario:str > Login del usuario que esta generando el reporte
+
+-campos: dict > diccionario con los nombres de los campos que se deben mostrar en el reporte. 
+                El Key es el nombre del campo para el usuario, el value es el nombre del campo para la DB
+
+TODO:   Crear una interfaz repositorio para conectar con la base de datos. la interfaz debe tener un metodo
+        generar que reciba como parametro un diccionario con los nombres de los campos que se deben mostrar
+        en el reporte.
+        El metodo debe devolver un  una lista de tuplas con los datos del reporte
+
+
+***Application***
+TODO: Crear una caso de uso GenerarReporte que reciba como parametro el diccionario con los nombres de 
+      los campos que se deben mostrar en el reporte. El caso de uso debe llamar al repositorio para
+      generar el reporte y devolver la lista de tuplas con los datos del reporte
+    
+
+***Infrastructure***
+TODO:   Crear la implementacion de la interfaz repositorio para consultar la base de datos SQL Server
+        que es la que contiene los datos que se requieren para el reporte. Se utilizara sqlalchemy como
+        orm para la conexion con la base de datos. y se realizara el quiere mediane SQL raw con interpolacion
+        de parametros para la consulta.
+
+TODO:   Crear un service container que contenga el servicio del generador de reporte
+
+TODO:   Crear un controlador en stremalit que implemente el servicio del generador de reporte.
+        La interfaz de streamlit debe contener una lista de checkbox con los nombres de los 
+        campos que se deben mostrar en el reporte y un boton para generar el reporte el cual se
+        debe mostrar como una tabla en la aplicacion.
