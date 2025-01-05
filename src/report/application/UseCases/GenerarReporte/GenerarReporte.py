@@ -1,4 +1,4 @@
-from ....domain.entities.Report import Report
+from ....domain.patterns.ValueObjects.ReportCampos import ReportCampos
 from ....domain.patterns.repository.IReportRepository import IReportRepository
 
 
@@ -7,4 +7,5 @@ class GenerarReporte:
         self.__report_repository = report_repository
 
     def run(self, campos: dict) -> list[tuple]:
+        campos = ReportCampos(campos)
         return self.__report_repository.generar(campos)
