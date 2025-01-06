@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
-from ..ValueObjects.ReportCampos import ReportCampos
+from datetime import datetime
+
+from ...entities.Report import Report
 
 class IReportRepository(ABC):
     @abstractmethod
-    def generar(self, campos: ReportCampos) -> list[tuple]:
+    def generar(self, campos: Report, fecha_desde: datetime, fecha_hasta: datetime) -> list[tuple]:
         pass 
     
     

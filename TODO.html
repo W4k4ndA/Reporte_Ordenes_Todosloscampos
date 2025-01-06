@@ -70,3 +70,19 @@ TODO: Crear un controlador en stremalit que implemente el servicio del generador
 La interfaz de streamlit debe contener una lista de checkbox con los nombres de los
 campos que se deben mostrar en el reporte y un boton para generar el reporte el cual se
 debe mostrar como una tabla en la aplicacion.
+
+
+
+from datetime import datetime
+
+from src.report.domain.entities.Report import Report
+
+from src.report.domain.patterns.ValueObjects.ReportCampos import ReportCampos
+
+from src.report.infrastructure.repositories.mssql.MssqlReportRepository import MssqlReportRepository
+
+repo = MssqlReportRepository()
+
+entidad = Report(ReportCampos({"CodOrden":"CodOrden", "NombreCliente":"NombreCliente", "Entregado":"Entregado"}))
+
+res = repo.generar(entidad, datetime(2021, 12, 1), datetime(2021, 12, 31))
