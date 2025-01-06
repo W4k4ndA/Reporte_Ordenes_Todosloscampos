@@ -14,8 +14,6 @@ class MssqlReportRepository(IReportRepository):
     def generar(self, report: Report, fecha_desde: datetime, fecha_hasta: datetime) -> list[tuple]:
 
         query_params = {
-            # "str_fecha_desde" : fecha_desde.strftime("'%Y%m%d 00:00:00'"),
-            # "str_fecha_hasta" : fecha_hasta.strftime("'%Y%m%d 23:59:59'")
             "str_fecha_desde" : fecha_desde,
             "str_fecha_hasta" : fecha_hasta
         }
