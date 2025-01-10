@@ -1,7 +1,7 @@
 from types import SimpleNamespace
 
 from .repositories.mssql.MssqlReportRepository import MssqlReportRepository
-from ..application.UseCases.GenerarReporte import GenerarReporte
+from ..application.UseCases.GenerarReporte.GenerarReporte import GenerarReporte
 
 report_repository = MssqlReportRepository()
 

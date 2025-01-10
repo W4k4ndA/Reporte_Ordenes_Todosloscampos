@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
+from src.report.infrastructure.handlers.StreamlitReportHandler import StreamlitReportHandler as srh
 
 # Título de la aplicación
 with st.container():
@@ -32,8 +33,8 @@ with st.container():
     st.subheader("Seleccione los campos a mostrar en el reporte")
 
 #Lista de checkbox para seleccionar los campos que se deben mostrar en el reporte
-campos_disponibles = ["Opcion 1", "Opcion 2", "Opcion 3", "Opcion 4", "Opcion 5"]
-campos_prefijados = ["Opcion 1", "Opcion 2", "Opcion 4"]
+campos_disponibles = ["CodOrden", "NombreCliente", "Entregado"]
+campos_prefijados = ["CodOrden", "NombreCliente"]
 campos_seleccionados = st.multiselect("Campos", campos_disponibles, default=campos_prefijados)
 
 
@@ -46,6 +47,8 @@ if st.button("Generar Reporte", type='primary'):
     st.write("Fecha de inicio del rango:", fecha_inicio)
     st.write("Fecha de final del rango:", fecha_final)
     
+    data = srh().get_report(fecha_inicio, fecha_final, campos_seleccionados)
+        
     # st.write("Reporte generado con los siguientes campos:", campos_seleccionados)
     #Resultado de la consulta   
-    st.dataframe([i for i in range(10)])
+    st.dataframe(data=data, use_container_width=True)
