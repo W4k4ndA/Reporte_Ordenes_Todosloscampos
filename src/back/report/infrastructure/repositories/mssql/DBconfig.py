@@ -32,7 +32,6 @@ class DBconfig:
                 results = self.__connection.execute(query)
         else:
             if type(params) == dict :
-                print("Ejecutamos la consulta CON parametros")        
                 results = self.__connection.execute(query, parameters)
                 
         
