@@ -1,6 +1,4 @@
 from datetime import datetime
-import pandas as pd
-import io
 
 
 from ..back.report.infrastructure.handlers.StreamlitReportHandler import StreamlitReportHandler as srh
@@ -24,7 +22,7 @@ def main(st):
 
     with st.expander("--Instrucciones de uso--"):
         st.write("""
-        - Seleccione el rango de fechas sobre el que desea generar el reporte.
+        - Seleccione el rango de fechas sobre el que desea generar el reporte. Si desea consultar para un solo dia, la fecha de fin debe ser un dia mayor a la fecha de inicio. 
         - Seleccione los campos que se deben mostrar en el reporte. Puede escribirlos o seleccionarlos de la lista. Hay un grupo de campos ya preseleccionados.
         - Presione el boton "Generar Reporte" para obtener los resultados y optar a descargalos.
         """)
@@ -38,7 +36,7 @@ def main(st):
     col1, col2 = st.columns(2)
     fecha_inicio = col1.date_input("Fecha Inicio", value=datetime.today())
     fecha_final = col2.date_input("Fecha Final", value=datetime.today())
-
+    
     st.write("") # Espacio entre las filas
     st.write("") # Espacio entre las filas
 
@@ -72,9 +70,21 @@ def main(st):
         
         data = srh().get_data_report(fecha_inicio, fecha_final, campos_seleccionados)
         
+        #Estilo de la tabla
+        st.markdown("""
+                    <style>
+                        .dataframe th, .dataframe td {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                            text-align: center;
+                        }
+                        .dataframe th {
+                            background-color: #f0f0f0;
+                        }
+                    </style>
+                    """, unsafe_allow_html=True)
         
-        # st.write("Reporte generado con los siguientes campos:", campos_seleccionados)
-        #Resultado de la consulta   
+        #Tabulacion del resultado de la consulta   
         st.dataframe(data, use_container_width=True)
         
         data_bytearray = srh.get_excel_data_report(data)
